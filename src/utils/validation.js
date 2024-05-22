@@ -3,7 +3,7 @@ export const validateData = (email, password) => {
     email
   );
   const isPasswordValid = /^(?=.*\d)(.{4,})$/.test(password);
-  if (!isEmailVailid) return "Email is invalid.";
-  if (!isPasswordValid) return "Password is invalid";
+  if (!isEmailVailid) return "Enter a valid email.";
+  if (!isPasswordValid) return "Password is too weak.";
   return null;
 };
