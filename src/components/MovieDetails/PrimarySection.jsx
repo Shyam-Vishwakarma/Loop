@@ -5,11 +5,19 @@ const PrimarySection = ({ primaryDetails }) => {
     backdrop_path,
     title,
     status,
-    runtimeString,
+    runtime,
     topCasts,
     genresArray,
     overview,
   } = primaryDetails;
+
+  function convertToHoursMinutes(runtime) {
+    const hours = Math.floor(runtime / 60);
+    const minutes = runtime % 60;
+    return `${hours}h ${String(minutes).padStart(2, "0")}m`;
+  }
+
+  const runtimeString = runtime ? convertToHoursMinutes(runtime) : null;
   return (
     <>
       {" "}

@@ -1,10 +1,11 @@
 import { useState, useRef } from "react";
 import Header from "./Header";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser } from "../utils/userSlice";
+import { setUser } from "../redux/slices/userReducer";
 import { useNavigate } from "react-router-dom";
 import { signIn, signUp } from "./authService";
 import { errorMessages } from "../utils/constants";
+
 const Login = () => {
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
@@ -12,7 +13,6 @@ const Login = () => {
   const displayName = useRef();
   const email = useRef();
   const password = useRef();
-  // const errorBox = document.querySelector(".errorBox");
   const errorBox = useRef();
   const [isLogIn, setIsLogIn] = useState(true);
   const [btnText, setBtnText] = useState("Sign In");
@@ -21,12 +21,14 @@ const Login = () => {
   const hideErrorBox = () => {
     errorBox.current.classList.add("hidden");
   };
+
   const toggleSignIn = () => {
     setIsLogIn(!isLogIn);
     hideErrorBox();
     if (isLogIn) setBtnText("Sign In");
     else setBtnText("Sign up");
   };
+
   const handleButtonClick = async () => {
     try {
       if (!isLogIn) {
@@ -41,9 +43,9 @@ const Login = () => {
           email.current.value,
           password.current.value
         );
-        // Dispatch user details to Redux and navigate
+        // Dispatch user details to Redux using the correct action
         dispatch(
-          addUser({
+          setUser({
             displayName: user.displayName,
             uid: user.uid,
             email: user.email,
@@ -66,6 +68,7 @@ const Login = () => {
   };
 
   if (user) navigate("/browse");
+
   return (
     !user && (
       <>
@@ -118,13 +121,11 @@ const Login = () => {
               type="password"
               placeholder="Password"
             />
-            {/* <p className="text-red-500 mt-2">{errMessage}</p> */}
             <button
-              // className="bg-gray-800 border border-gray-500 text-gray-200 rounded h-10 mt-6"
-              className="md:py-2 py-1 px-5 me-2 w-full mt-4 text-gray-300 bg-gray-800 rounded border border-gr  ay-300 hover:bg-gray-700 hover:text-gray-200"
+              className="md:py-2 py-1 px-5 me-2 w-full mt-4 text-gray-300 bg-gray-800 rounded border border-gray-300 hover:bg-gray-700 hover:text-gray-200"
               onClick={handleButtonClick}
             >
-              {isLogIn ? "Sign In" : "Sign Up"}
+              {btnText}
             </button>
             <p className="mt-2 text-xs">
               <span className="text-gray-300 text-xs">
@@ -143,4 +144,5 @@ const Login = () => {
     )
   );
 };
+
 export default Login;

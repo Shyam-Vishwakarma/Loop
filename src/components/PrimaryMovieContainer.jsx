@@ -1,13 +1,35 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { fetchMovieTrailer } from "../redux/slices/movieSlice";
 
 const PrimaryMovieContainer = () => {
+  const dispatch = useDispatch();
+
   const trailerKey = useSelector((store) => store.movies.mainMovieTrailer);
+
   const nowPlayingMovies = useSelector(
     (store) => store.movies.nowPlayingMovies
   );
+
+  useEffect(() => {
+    if (nowPlayingMovies && nowPlayingMovies.length > 0) {
+      const movieId = nowPlayingMovies[0].id;
+      dispatch(fetchMovieTrailer(movieId));
+    }
+  }, [dispatch, nowPlayingMovies]);
+
+  if (!trailerKey) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-300"></div>
+      </div>
+    );
+  }
+
   if (!nowPlayingMovies || !trailerKey) return null;
   const { title, overview, id } = nowPlayingMovies[0];
+
   return (
     <>
       <div className="w-[100%] flex justify-center">

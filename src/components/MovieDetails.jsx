@@ -1,54 +1,90 @@
 import { useParams } from "react-router-dom";
-import useMovieDetails from "../utils/useMovieDetails";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMovieDetails } from "../redux/slices/movieDetailsSlice";
 import Header from "./Header";
 import PrimarySection from "./MovieDetails/PrimarySection";
 import SecondarySection from "./MovieDetails/SecondarySection";
-import YouTubePlayer from "./YouTubePlayer";
 
 const MovieDetails = () => {
   const { movieId } = useParams();
-  useMovieDetails(movieId);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
 
-  const movies = useSelector((store) => store.movieDetails.movies);
-  const isMoviePresent = movies.hasOwnProperty(movieId);
-  if (!isMoviePresent) return null;
+  // Access the loading and error states as well
+  const {
+    movies,
+    loading: isLoading,
+    error,
+  } = useSelector((store) => store.movieDetails);
 
-  const basicDetails = movies[movieId]?.basicDetails || {};
-  const cast = movies[movieId]?.cast || [];
+  useEffect(() => {
+    // Dispatch the action to fetch movie details
+    dispatch(fetchMovieDetails(movieId));
+
+    // Set a timeout to handle potential loading state
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, [dispatch, movieId]);
+
+  // Display a loading state
+  if (isLoading || (loading && !movies[movieId])) {
+    return (
+      <>
+        <Header />
+        <div className="flex justify-center items-center h-screen">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-300"></div>
+        </div>
+      </>
+    );
+  }
+
+  // Display an error state
+  if (error) {
+    return (
+      <>
+        <Header />
+        <div className="flex justify-center items-center h-screen">
+          <div className="text-red-500">Error: {error}</div>
+        </div>
+      </>
+    );
+  }
+
+  // Check if movie data is available
+  const isMoviePresent = movies && movies[movieId];
+  if (!isMoviePresent) {
+    return (
+      <>
+        <Header />
+        <div className="flex justify-center items-center h-screen">
+          <div className="text-white">No movie details found</div>
+        </div>
+      </>
+    );
+  }
+
+  // Extract movie data
+  const basicDetails = movies[movieId]?.details || {};
+  const cast = movies[movieId]?.credits?.cast || [];
   const topCasts = cast?.slice(0, 5).map((c) => c.name);
   const similar = movies[movieId]?.similar || [];
 
-  function convertToHoursMinutes(runtime) {
-    const hours = Math.floor(runtime / 60);
-    const minutes = runtime % 60;
-    return `${hours}h ${String(minutes).padStart(2, "0")}m`;
-  }
-  const { backdrop_path, genres, overview, status, runtime, title } =
-    basicDetails;
+  const { genres } = basicDetails;
   const genresArray = genres?.map((genre) => genre.name);
-  const runtimeString = runtime ? convertToHoursMinutes(runtime) : null;
-  const primaryDetails = {
-    backdrop_path,
-    title,
-    status,
-    overview,
-    runtimeString,
-    topCasts,
-    genresArray,
-  };
   const secondaryDetails = {
     cast,
     genresArray,
     similar,
   };
+
   return (
     <>
       <Header />
-      {/* <YouTubePlayer videoId="dQw4w9WgXcQ" />  */}
-      <PrimarySection primaryDetails={primaryDetails} />
+      <PrimarySection primaryDetails={basicDetails} />
       <SecondarySection secondaryDetails={secondaryDetails} />
     </>
   );
 };
+
 export default MovieDetails;
