@@ -83,7 +83,6 @@ const Login = () => {
     !user && (
       <>
         <Header />
-        {/* Rest of component remains the same */}
         <style>
           {`input:-webkit-autofill,
               input:-webkit-autofill:hover,

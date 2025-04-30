@@ -1,23 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { fetchMovieTrailer } from "@slices/movieSlice";
 
 const PrimaryMovieContainer = () => {
-  const dispatch = useDispatch();
-
   const trailerKey = useSelector((store) => store.movies.mainMovieTrailer);
 
   const nowPlayingMovies = useSelector(
     (store) => store.movies.nowPlayingMovies
   );
-
-  useEffect(() => {
-    if (nowPlayingMovies && nowPlayingMovies.length > 0) {
-      const movieId = nowPlayingMovies[0].id;
-      dispatch(fetchMovieTrailer(movieId));
-    }
-  }, [dispatch, nowPlayingMovies]);
 
   if (!trailerKey) {
     return (
