@@ -3,7 +3,7 @@ import Header from "@common/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@slices/userSlice";
 import { useNavigate } from "react-router-dom";
-import { signIn, signUp } from "@components/authService";
+import AuthService from "@services/authService";
 import { errorMessages } from "@utils/constants";
 
 const Login = () => {
@@ -38,12 +38,11 @@ const Login = () => {
           throw error;
         }
         setBtnText("Signing up...");
-        const user = await signUp(
+        const user = await AuthService.signUp(
           displayName.current.value,
           email.current.value,
           password.current.value
         );
-        // Dispatch user details to Redux using the correct action
         dispatch(
           setUser({
             displayName: user.displayName,
@@ -54,7 +53,18 @@ const Login = () => {
         navigate("/browse");
       } else {
         setBtnText("Signing in...");
-        await signIn(email.current.value, password.current.value);
+        const user = await AuthService.signIn(
+          email.current.value,
+          password.current.value
+        );
+        dispatch(
+          setUser({
+            displayName: user.displayName,
+            uid: user.uid,
+            email: user.email,
+            photoURL: user.photoURL,
+          })
+        );
         navigate("/browse");
       }
     } catch (error) {
@@ -73,6 +83,7 @@ const Login = () => {
     !user && (
       <>
         <Header />
+        {/* Rest of component remains the same */}
         <style>
           {`input:-webkit-autofill,
               input:-webkit-autofill:hover,

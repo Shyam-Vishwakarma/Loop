@@ -1,25 +1,27 @@
 import { useDispatch, useSelector } from "react-redux";
 import { LOGO_URL } from "@utils/constants";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "@utils/firebase";
 import { useEffect } from "react";
 import { setUser, clearUser } from "@slices/userSlice";
 import { useNavigate } from "react-router-dom";
+import AuthService from "@services/authService";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleSignOut = () => {
-    signOut(auth)
+    AuthService.logOut()
       .then(() => {
         dispatch(clearUser());
         navigate("/");
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.error("Sign out error:", err);
+      });
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = AuthService.subscribeToAuthChanges((user) => {
       if (user) {
         const { displayName, uid, photoURL, email } = user;
         dispatch(
@@ -30,21 +32,20 @@ const Header = () => {
             email: email,
           })
         );
-        // navigate("/browse");
       } else {
-        // User is signed out
         dispatch(clearUser());
-        navigate("/");
       }
     });
+
     return () => unsubscribe();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
+
   const user = useSelector((store) => store.user);
 
   const navigateToHome = () => {
     user ? navigate("/browse") : navigate("/");
   };
+
   return (
     <div className="flex absolute items-center justify-between md:py-8 bg-black md:bg-transparent w-full h-[3.32rem]">
       <img
@@ -67,4 +68,5 @@ const Header = () => {
     </div>
   );
 };
+
 export default Header;
