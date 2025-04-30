@@ -1,4 +1,4 @@
-import MovieCard from "./MovieCard";
+import MovieCard from "@ui/cards/MovieCard";
 
 const MovieCardContainer = ({ title, movies }) => {
   if (!movies) return null;

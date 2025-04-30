@@ -1,9 +1,9 @@
 import { useState, useRef } from "react";
-import Header from "./Header";
+import Header from "@common/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@slices/userSlice";
 import { useNavigate } from "react-router-dom";
-import { signIn, signUp } from "./authService";
+import { signIn, signUp } from "@components/authService";
 import { errorMessages } from "@utils/constants";
 
 const Login = () => {

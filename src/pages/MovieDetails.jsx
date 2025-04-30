@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMovieDetails } from "../redux/slices/movieDetailsSlice";
-import Header from "./Header";
-import PrimarySection from "./MovieDetails/PrimarySection";
-import SecondarySection from "./MovieDetails/SecondarySection";
+import { fetchMovieDetails } from "@slices/movieDetailsSlice";
+import Header from "@common/Header";
+import PrimarySection from "@features/movieDetails/PrimarySection";
+import SecondarySection from "@features/movieDetails/SecondarySection";
 
 const MovieDetails = () => {
   const { movieId } = useParams();

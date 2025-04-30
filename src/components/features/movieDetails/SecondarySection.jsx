@@ -1,5 +1,5 @@
-import MovieCardContainer from "../MovieCardContainer";
-import PeopleCard from "../PeopleCard";
+import MovieCardContainer from "@ui/containers/MovieCardContainer";
+import PeopleCard from "@ui/cards/PeopleCard";
 
 const SecondarySection = ({ secondaryDetails }) => {
   const { cast, genresArray, similar } = secondaryDetails;

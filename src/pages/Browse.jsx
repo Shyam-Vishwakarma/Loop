@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchAllMovies } from "@slices/movieSlice";
-import Header from "./Header";
-import PrimaryMovieContainer from "./PrimaryMovieContainer";
-import SecondaryMovieContainer from "./SecondoryMovieContainer";
+import Header from "@common/Header";
+import PrimaryMovieContainer from "@ui/containers/PrimaryMovieContainer";
+import SecondaryMovieContainer from "@ui/containers/SecondoryMovieContainer";
 
 const Browse = () => {
   const dispatch = useDispatch();
