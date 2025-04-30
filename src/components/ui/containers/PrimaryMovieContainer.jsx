@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import Spinner from "../spinner/Spinner";
 
 const PrimaryMovieContainer = () => {
   const trailerKey = useSelector((store) => store.movies.mainMovieTrailer);
@@ -9,11 +10,7 @@ const PrimaryMovieContainer = () => {
   );
 
   if (!trailerKey) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-300"></div>
-      </div>
-    );
+    return <Spinner />;
   }
 
   if (!nowPlayingMovies || !trailerKey) return null;

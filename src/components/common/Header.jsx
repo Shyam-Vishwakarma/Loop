@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { LOGO_URL } from "@utils/constants";
-import { useEffect } from "react";
-import { setUser, clearUser } from "@slices/userSlice";
+import { clearUser } from "@slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import AuthService from "@services/authService";
 
@@ -19,26 +18,6 @@ const Header = () => {
         console.error("Sign out error:", err);
       });
   };
-
-  useEffect(() => {
-    const unsubscribe = AuthService.subscribeToAuthChanges((user) => {
-      if (user) {
-        const { displayName, uid, photoURL, email } = user;
-        dispatch(
-          setUser({
-            displayName: displayName,
-            uid: uid,
-            photoURL: photoURL,
-            email: email,
-          })
-        );
-      } else {
-        dispatch(clearUser());
-      }
-    });
-
-    return () => unsubscribe();
-  }, [dispatch]);
 
   const user = useSelector((store) => store.user);
 
