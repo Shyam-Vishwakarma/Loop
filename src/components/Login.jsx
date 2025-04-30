@@ -1,10 +1,10 @@
 import { useState, useRef } from "react";
 import Header from "./Header";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../redux/slices/userReducer";
+import { setUser } from "@slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { signIn, signUp } from "./authService";
-import { errorMessages } from "../utils/constants";
+import { errorMessages } from "@utils/constants";
 
 const Login = () => {
   const user = useSelector((store) => store.user);

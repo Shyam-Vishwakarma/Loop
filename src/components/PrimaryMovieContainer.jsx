@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchMovieTrailer } from "../redux/slices/movieSlice";
+import { fetchMovieTrailer } from "@slices/movieSlice";
 
 const PrimaryMovieContainer = () => {
   const dispatch = useDispatch();

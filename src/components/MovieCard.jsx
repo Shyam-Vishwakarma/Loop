@@ -1,4 +1,4 @@
-import { TMDB_IMG_URL } from "../utils/constants";
+import { TMDB_IMG_URL } from "@utils/constants";
 import { Link } from "react-router-dom";
 const MovieCard = ({ movie }) => {
   const { poster_path, id, title } = movie;

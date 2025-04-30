@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchAllMovies } from "../redux/slices/movieSlice";
+import { fetchAllMovies } from "@slices/movieSlice";
 import Header from "./Header";
 import PrimaryMovieContainer from "./PrimaryMovieContainer";
 import SecondaryMovieContainer from "./SecondoryMovieContainer";

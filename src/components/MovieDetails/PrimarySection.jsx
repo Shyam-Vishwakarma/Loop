@@ -1,4 +1,4 @@
-import { TMDB_BACKDROP_URL } from "../../utils/constants";
+import { TMDB_BACKDROP_URL } from "@utils/constants";
 
 const PrimarySection = ({ primaryDetails }) => {
   const {

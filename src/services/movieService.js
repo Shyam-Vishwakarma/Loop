@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BACKEND_URL } from "../utils/constants";
+import { BACKEND_URL } from "@utils/constants";
 const api = axios.create({ baseURL: BACKEND_URL });
 
 export const fetchNowPlayingMovies = () => api.get("/movies/now_playing");

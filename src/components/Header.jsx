@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { LOGO_URL, SEARCH_PLACEHOLDER } from "../utils/constants";
+import { LOGO_URL, SEARCH_PLACEHOLDER } from "@utils/constants";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../utils/firebase";
+import { auth } from "@utils/firebase";
 import { useEffect } from "react";
-import { setUser, clearUser } from "../redux/slices/userReducer.js"; // Import from redux slice
+import { setUser, clearUser } from "@slices/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {

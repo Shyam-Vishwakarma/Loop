@@ -1,4 +1,4 @@
-import { TMDB_IMG_URL } from "../utils/constants";
+import { TMDB_IMG_URL } from "@utils/constants";
 
 const PeopleCard = ({ people }) => {
   const { character, name, profile_path } = people;
