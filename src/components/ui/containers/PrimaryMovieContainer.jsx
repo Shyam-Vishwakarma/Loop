@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Spinner from "../spinner/Spinner";
+import YouTubePlayer from "@ui/cards/YouTubePlayer";
 
 const PrimaryMovieContainer = () => {
   const trailerKey = useSelector((store) => store.movies.mainMovieTrailer);
