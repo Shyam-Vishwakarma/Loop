@@ -19,13 +19,14 @@ const PrimaryMovieContainer = () => {
 
   return (
     <>
-      <div className="w-[100%] flex justify-center">
-        <iframe
-          className="w-[100%] aspect-video md:-mt-24 mt-[3.35rem] border border-gray-950"
-          src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1&loop=1&color=white&controls=0&modestbranding=1&playsinline=1&rel=0&enablejsapi=1`}
-          title="YouTube video player"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope;"
-        ></iframe>
+      <div className="flex justify-center items-center w-screen h-200 pointer-events-none">
+        <YouTubePlayer
+          videoId={trailerKey}
+          autoplay={true}
+          mute={true}
+          showControls={false}
+          className=""
+        />
       </div>
       <div className="absolute left-0 w-[10rem] md:w-[20rem] md:h-[100%] h-[14.48rem] bg-gradient-to-r from-black flex flex-col md:justify-center justify-end z-8 md:mt-0 mt-[3.35rem]">
         <div className="md:ml-[10%] ml-4 md:mb-0 mb-8">
