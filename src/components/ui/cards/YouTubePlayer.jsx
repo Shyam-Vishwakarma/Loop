@@ -8,6 +8,7 @@ const YouTubePlayer = (
   hideRelatedVideos = true,
   modestBranding = true,
   hideAnnotations = true,
+  loop = true,
   className = ""
 ) => {
   if (!videoId) {
@@ -29,6 +30,7 @@ const YouTubePlayer = (
     rel: hideRelatedVideos ? 0 : 1,
     modestbranding: modestBranding ? 1 : 0,
     iv_load_policy: hideAnnotations ? 3 : 1,
+    loop: loop ? 1 : 0,
   };
 
   const playerVarsString = new URLSearchParams(playerVars).toString();

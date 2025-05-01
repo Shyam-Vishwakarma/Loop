@@ -15,11 +15,11 @@ const PrimaryMovieContainer = () => {
   }
 
   if (!nowPlayingMovies || !trailerKey) return null;
-  const { title, overview, id } = nowPlayingMovies[0];
+  const { title, overview, id } = nowPlayingMovies[2];
 
   return (
     <>
-      <div className="flex justify-center items-center w-screen h-200 pointer-events-none">
+      <div className="flex justify-center items-center w-full h-200 pointer-events-none">
         <YouTubePlayer
           videoId={trailerKey}
           autoplay={true}
@@ -28,8 +28,8 @@ const PrimaryMovieContainer = () => {
           className=""
         />
       </div>
-      <div className="absolute left-0 w-[10rem] md:w-[20rem] md:h-[100%] h-[14.48rem] bg-gradient-to-r from-black flex flex-col md:justify-center justify-end z-8 md:mt-0 mt-[3.35rem]">
-        <div className="md:ml-[10%] ml-4 md:mb-0 mb-8">
+      <div className="absolute left-0 w-[10rem] md:w-[30rem] md:h-200 h-[14.48rem] bg-gradient-to-r from-black flex flex-col md:justify-end justify-end z-2 md:mt-0 mt-[3.35rem]">
+        <div className="md:ml-38 ml-4 md:mb-32 mb-8">
           <h1 className="text-white text-md md:text-3xl font-medium md:font-bold md:mb-4 mb-2">
             {title}
           </h1>
@@ -37,7 +37,7 @@ const PrimaryMovieContainer = () => {
             {overview}
           </p>
           <Link to={`/browse/${id}`}>
-            <button className="bg-red-600 md:px-4 md:py-2 px-2 py-1 text-center rounded md:text-sm text-xs text-white md:mt-4 mt-0">
+            <button className="bg-red-600 md:px-4 md:py-2 px-2 py-1 text-center rounded md:text-sm text-xs text-white md:mt-4 mt-0 hover:cursor-pointer">
               More Info
             </button>
           </Link>
