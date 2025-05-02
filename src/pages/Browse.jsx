@@ -17,16 +17,16 @@ const Browse = () => {
 
   useEffect(() => {
     if (nowPlayingMovies) {
-      dispatch(fetchMovieTrailer(nowPlayingMovies[2]?.id));
+      dispatch(fetchMovieTrailer(nowPlayingMovies[0]?.id));
     }
   }, [dispatch, nowPlayingMovies]);
 
   return (
     <>
       <Header />
-      <div className="relative flex flex-col w-full">
+      <div className="relative flex flex-col items-center w-full bg-black h-screen">
         <PrimaryMovieContainer />
-        <div className="absolute top-180 left-0 w-full z-3">
+        <div className="absolute md:top-180 top-[12rem] left-0 w-full z-3 ">
           <SecondaryMovieContainer />
         </div>
       </div>
