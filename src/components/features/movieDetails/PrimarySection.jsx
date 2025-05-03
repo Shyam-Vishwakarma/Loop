@@ -20,16 +20,15 @@ const PrimarySection = ({ primaryDetails }) => {
   const runtimeString = runtime ? convertToHoursMinutes(runtime) : null;
   return (
     <>
-      {" "}
       <div className="relative">
         <img
-          className="w-screen h-screen absolute"
+          className="aspect-video absolute"
           alt={title}
           src={TMDB_BACKDROP_URL + backdrop_path}
         />
-        <div className="absolute w-1/2 h-screen bg-gradient-to-r from-slate-950 z-5"></div>
+        <div className="absolute aspect-video bg-gradient-to-r from-black z-2"></div>
         <div
-          className="absolute w-1/2 h-screen bg-gradient-to-r from-slate-950 z-12 flex flex-col
+          className="absolute aspect-video h-full bg-gradient-to-r from-black z-12 flex flex-col
     justify-center px-8"
         >
           <div className="w-[24rem] mt-[10rem]">

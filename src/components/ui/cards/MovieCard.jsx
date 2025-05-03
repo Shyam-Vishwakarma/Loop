@@ -9,10 +9,12 @@ const MovieCard = ({ movie }) => {
         <img
           src={TMDB_IMG_URL + poster_path}
           alt={title}
-          className="w-full h-auto rounded"
+          className="w-full h-auto rounded object-cover"
         />
       </Link>
-      <p className="text-gray-300 md:text-sm text-xs md:mt-2 mt-1">{title}</p>
+      <p className="text-gray-300 md:text-sm text-xs md:mt-2 mt-1 truncate">
+        {title}
+      </p>
     </div>
   );
 };

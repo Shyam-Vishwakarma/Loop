@@ -73,8 +73,10 @@ const MovieDetails = () => {
   return (
     <>
       <Header />
-      <PrimarySection primaryDetails={basicDetails} />
-      <SecondarySection secondaryDetails={secondaryDetails} />
+      <div className="w-full h-full px-[10rem] bg-black pt-4">
+        <PrimarySection primaryDetails={basicDetails} />
+        <SecondarySection secondaryDetails={secondaryDetails} />
+      </div>
     </>
   );
 };

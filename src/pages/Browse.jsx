@@ -24,9 +24,9 @@ const Browse = () => {
   return (
     <>
       <Header />
-      <div className="relative flex flex-col items-center w-full bg-black h-screen">
+      <div className="flex flex-col items-center w-full bg-black min-h-screen">
         <PrimaryMovieContainer />
-        <div className="absolute md:top-180 top-[12rem] left-0 w-full z-3 ">
+        <div className="w-full">
           <SecondaryMovieContainer />
         </div>
       </div>

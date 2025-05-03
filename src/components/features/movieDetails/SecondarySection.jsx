@@ -5,7 +5,7 @@ const SecondarySection = ({ secondaryDetails }) => {
   const { cast, genresArray, similar } = secondaryDetails;
   return (
     <>
-      <div className="w-full bg-slate-950 px-2 py-2">
+      <div className="w-full bg-black px-2 py-2">
         <h2 className="text-gray-300 text-2xl ml-2">More details</h2>
         <div>
           <h3 className="text-gray-300 text-xl mt-4 ml-2">Cast</h3>

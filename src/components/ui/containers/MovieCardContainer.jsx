@@ -11,7 +11,7 @@ const MovieCardContainer = ({ title, movies }) => {
               {title}
             </h2>
           )}
-          <div className="flex overflow-auto mt-4 md:mx-8 mx-4 space-x-2 md:space-x-4 no-scrollbar">
+          <div className="flex overflow-x-auto mt-4 md:mx-8 mx-2 space-x-2 md:space-x-4 no-scrollbar pb-2">
             {movies.map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
             ))}
