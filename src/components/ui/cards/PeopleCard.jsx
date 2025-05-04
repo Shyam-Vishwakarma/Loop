@@ -11,8 +11,9 @@ const PeopleCard = ({ people }) => {
     <div className="w-[8.2rem] rounded-lg bg-black flex-shrink-0 text-gray-900 border border-gray-700">
       <div className="h-[8rem]">
         {!imageLoaded && <Shimmer className="w-full h-[8rem]" />}
+
         <img
-          className="w-full h-[8rem] rounded-t-lg object-cover"
+          className={`w-full h-[8rem] rounded-t-lg object-cover ${imageLoaded ? "" : "hidden"}`}
           alt={name}
           src={TMDB_IMG_URL + profile_path}
           onLoad={() => setImageLoaded(true)}

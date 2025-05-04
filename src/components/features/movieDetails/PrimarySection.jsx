@@ -25,7 +25,7 @@ const PrimarySection = ({ primaryDetails, topCasts }) => {
         <div className="w-full h-full relative">
           {!imageLoaded && <Shimmer className="w-full h-full" />}
           <img
-            className="object-cover h-full w-full rounded-lg"
+            className={`object-cover h-full w-full rounded-lg ${imageLoaded ? "" : "hidden"}`}
             alt={title}
             src={TMDB_BACKDROP_URL + backdrop_path}
             onLoad={() => setImageLoaded(true)}
