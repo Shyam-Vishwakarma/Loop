@@ -10,7 +10,7 @@ const MovieCard = ({ movie }) => {
   if (!poster_path) return null;
 
   return (
-    <div className="md:w-32 w-24 flex-shrink-0">
+    <div className="w-[45%] md:w-32 flex-shrink-0">
       <Link to={`/browse/${id}`}>
         <div className="relative">
           {!imageLoaded && <Shimmer className="w-full aspect-[2/3] rounded" />}
@@ -24,7 +24,7 @@ const MovieCard = ({ movie }) => {
           />
         </div>
       </Link>
-      <p className="text-gray-300 md:text-sm text-xs md:mt-2 mt-1 truncate">
+      <p className="text-gray-300 text-lg md:text-sm md:mt-2 mt-2 truncate">
         {title}
       </p>
     </div>
