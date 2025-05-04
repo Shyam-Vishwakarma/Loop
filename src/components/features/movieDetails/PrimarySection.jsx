@@ -50,7 +50,7 @@ const PrimarySection = ({ primaryDetails, topCasts }) => {
 
       <div
         className="flex flex-col justify-center bg-black w-full
-         px-4 lg:hidden sm:hidden md:hidden"
+         px-4 lg:hidden sm:hidden md:hidden mb-2 border-b-2 border-gray-800 pb-4 rounded"
       >
         <MovieDetailsCard
           movie={{
