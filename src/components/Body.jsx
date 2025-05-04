@@ -21,6 +21,10 @@ const Body = () => {
       element: <ProtectedRoute />,
       children: [
         {
+          path: "/",
+          element: <Browse />,
+        },
+        {
           path: "browse",
           element: <Browse />,
         },

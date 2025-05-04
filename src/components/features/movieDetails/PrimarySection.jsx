@@ -1,9 +1,13 @@
 import { TMDB_BACKDROP_URL } from "@utils/constants";
 import MovieDetailsCard from "../../ui/cards/MovieDetailsCard";
+import { useState } from "react";
+import Shimmer from "../../ui/shimmer/Shimmer";
 
 const PrimarySection = ({ primaryDetails, topCasts }) => {
   const { backdrop_path, title, status, runtime, genresArray, overview } =
     primaryDetails;
+
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   function convertToHoursMinutes(runtime) {
     const hours = Math.floor(runtime / 60);
@@ -16,21 +20,21 @@ const PrimarySection = ({ primaryDetails, topCasts }) => {
     <>
       <div
         className="w-full bg-black p-2
-      h-[30vh] sm:h-[40vh] md:h-[55vh] lg:h-[90vh]
-      "
+      h-[30vh] sm:h-[40vh] md:h-[55vh] lg:h-[90vh]"
       >
         <div className="w-full h-full relative">
+          {!imageLoaded && <Shimmer className="w-full h-full" />}
           <img
             className="object-cover h-full w-full rounded-lg"
             alt={title}
             src={TMDB_BACKDROP_URL + backdrop_path}
+            onLoad={() => setImageLoaded(true)}
           />
           <div
             className="top-0 h-full pl-8 sm:flex md:flex lg:flex flex-col justify-center lg:pt-40 z-0 bg-gradient-to-r from-black/90 to-transparent
           w-[15rem] sm:w-[25rem] md:w-[30rem] lg:w-[30rem]
           sm:absolute md:absolute lg:absolute
-          hidden
-          "
+          hidden"
           >
             <div className="lg:mt-[10rem] md:mt-[10rem] sm:mt-[4rem]">
               <MovieDetailsCard
