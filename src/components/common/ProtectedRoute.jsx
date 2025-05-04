@@ -1,33 +1,42 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Navigate } from "react-router-dom";
 import AuthService from "@services/authService";
+import { setUser } from "@slices/userSlice";
+import Spinner from "@ui/spinner/Spinner";
+import { Outlet } from "react-router-dom";
 
 const ProtectedRoute = () => {
-  const [isChecking, setIsChecking] = useState(true);
-  const user = useSelector((store) => store.user);
+  const [authChecked, setAuthChecked] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!user) {
-      const unsubscribe = AuthService.subscribeToAuthChanges(() => {
-        setIsChecking(false);
-      });
+    const unsubscribe = AuthService.subscribeToAuthChanges((user) => {
+      if (user) {
+        setIsAuthenticated(true);
+        dispatch(
+          setUser({
+            displayName: user.displayName,
+            uid: user.uid,
+            email: user.email,
+            photoURL: user.photoURL,
+          })
+        );
+      } else {
+        setIsAuthenticated(false);
+      }
+      setAuthChecked(true);
+    });
 
-      return () => unsubscribe();
-    } else {
-      setIsChecking(false);
-    }
-  }, [user]);
+    return () => unsubscribe();
+  }, [dispatch]);
 
-  if (isChecking) {
-    return (
-      <div className="flex justify-center items-center h-screen bg-black">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-300"></div>
-      </div>
-    );
+  if (!authChecked) {
+    return <Spinner />;
   }
 
-  return user ? <Outlet /> : <Navigate to="/" replace />;
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
 export default ProtectedRoute;

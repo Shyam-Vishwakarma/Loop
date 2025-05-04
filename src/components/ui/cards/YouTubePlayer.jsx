@@ -35,7 +35,6 @@ const YouTubePlayer = (
 
   const playerVarsString = new URLSearchParams(playerVars).toString();
   const videoSrc = `https://www.youtube.com/embed/${videoId}?${playerVarsString}`;
-  console.log("YouTube Player Source:", videoSrc);
 
   return (
     <>

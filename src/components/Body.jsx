@@ -4,17 +4,17 @@ import Browse from "@pages/Browse";
 import MovieDetails from "@pages/MovieDetails";
 import NotFound from "@pages/NotFound";
 import ProtectedRoute from "@common/ProtectedRoute";
-import AuthChecker from "./features/auth/AuthChecker";
+import PublicRoute from "./common/PublicRoute";
 
 const Body = () => {
   const appRouter = createBrowserRouter([
     {
-      path: "/",
-      element: <AuthChecker />,
-    },
-    {
       path: "/login",
-      element: <Login />,
+      element: (
+        <PublicRoute>
+          <Login />
+        </PublicRoute>
+      ),
     },
     {
       path: "/",
