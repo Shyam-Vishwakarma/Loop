@@ -1,15 +1,9 @@
 import { TMDB_BACKDROP_URL } from "@utils/constants";
+import MovieDetailsCard from "../../ui/cards/MovieDetailsCard";
 
-const PrimarySection = ({ primaryDetails }) => {
-  const {
-    backdrop_path,
-    title,
-    status,
-    runtime,
-    topCasts,
-    genresArray,
-    overview,
-  } = primaryDetails;
+const PrimarySection = ({ primaryDetails, topCasts }) => {
+  const { backdrop_path, title, status, runtime, genresArray, overview } =
+    primaryDetails;
 
   function convertToHoursMinutes(runtime) {
     const hours = Math.floor(runtime / 60);
@@ -20,42 +14,54 @@ const PrimarySection = ({ primaryDetails }) => {
   const runtimeString = runtime ? convertToHoursMinutes(runtime) : null;
   return (
     <>
-      <div className="relative">
-        <img
-          className="aspect-video absolute"
-          alt={title}
-          src={TMDB_BACKDROP_URL + backdrop_path}
-        />
-        <div className="absolute aspect-video bg-gradient-to-r from-black z-2"></div>
-        <div
-          className="absolute aspect-video h-full bg-gradient-to-r from-black z-12 flex flex-col
-    justify-center px-8"
-        >
-          <div className="w-[24rem] mt-[10rem]">
-            <h1 className="text-white font-medium text-2xl">{title}</h1>
-            <p className="text-gray-400 text-sm">
-              <span>{status} | </span>
-              {runtimeString && <span>{runtimeString} | </span>}
-              <span>{genresArray?.slice(0, 3).join(", ")}</span>
-            </p>
-            <p className="text-white text-sm mt-4">{overview}</p>
-            <p className="text-white text-sm mt-4">
-              <span className="text-gray-400 text-sm ">Starring:</span>{" "}
-              {topCasts?.join(", ")}
-            </p>
-            <button className="text-gray-300 text-xs font-medium mt-4">
-              <span>
-                <img
-                  className="w-4 inline-block mr-1"
-                  alt="play"
-                  src="https://i.postimg.cc/m2w9qgj4/icons8-play-50.png"
-                />
-              </span>
-              Play Trailer
-            </button>
+      <div
+        className="w-full bg-black p-2
+      h-[30vh] sm:h-[40vh] md:h-[55vh] lg:h-[90vh]
+      "
+      >
+        <div className="w-full h-full relative">
+          <img
+            className="object-cover h-full w-full rounded-lg"
+            alt={title}
+            src={TMDB_BACKDROP_URL + backdrop_path}
+          />
+          <div
+            className="top-0 h-full pl-8 sm:flex md:flex lg:flex flex-col justify-center lg:pt-40 z-0 bg-gradient-to-r from-black/90 to-transparent
+          w-[15rem] sm:w-[25rem] md:w-[30rem] lg:w-[30rem]
+          sm:absolute md:absolute lg:absolute
+          hidden
+          "
+          >
+            <div className="lg:mt-[10rem] md:mt-[10rem] sm:mt-[4rem]">
+              <MovieDetailsCard
+                movie={{
+                  title,
+                  status,
+                  runtimeString,
+                  overview,
+                  genresArray,
+                  topCasts,
+                }}
+              />
+            </div>
           </div>
         </div>
-        <div className="h-screen"></div>
+      </div>
+
+      <div
+        className="flex flex-col justify-center bg-black w-full
+         px-4 lg:hidden sm:hidden md:hidden"
+      >
+        <MovieDetailsCard
+          movie={{
+            title,
+            status,
+            runtimeString,
+            overview,
+            genresArray,
+            topCasts,
+          }}
+        />
       </div>
     </>
   );

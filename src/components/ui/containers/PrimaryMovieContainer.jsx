@@ -16,7 +16,7 @@ const PrimaryMovieContainer = () => {
   }
 
   if (!nowPlayingMovies || !trailerKey) return null;
-  const { title, overview, id } = nowPlayingMovies[2];
+  const { title, overview, id } = nowPlayingMovies[0];
 
   return (
     <>

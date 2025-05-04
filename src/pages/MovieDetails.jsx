@@ -73,8 +73,11 @@ const MovieDetails = () => {
   return (
     <>
       <Header />
-      <div className="w-full h-full px-[10rem] bg-black pt-4">
-        <PrimarySection primaryDetails={basicDetails} />
+      <div
+        className="w-full h-full bg-black 
+      lg:px-[6rem] px-2"
+      >
+        <PrimarySection primaryDetails={basicDetails} topCasts={topCasts} />
         <SecondarySection secondaryDetails={secondaryDetails} />
       </div>
     </>

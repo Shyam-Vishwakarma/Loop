@@ -4,7 +4,7 @@ const PeopleCard = ({ people }) => {
   const { character, name, profile_path } = people;
   if (!profile_path) return null;
   return (
-    <div className="w-[8rem] rounded-lg bg-slate-950 flex-shrink-0 text-gray-900 border border-gray-700">
+    <div className="w-[8.2rem] rounded-lg bg-black flex-shrink-0 text-gray-900 border border-gray-700">
       <img
         className="w-full h-[8rem] rounded-t-lg object-cover"
         alt={name}
