@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllMovies, fetchMovieTrailer } from "@slices/movieSlice";
 import Header from "@common/Header";
@@ -15,17 +15,26 @@ const Browse = () => {
     dispatch(fetchAllMovies());
   }, [dispatch]);
 
+  const getRandomMovie = useCallback(() => {
+    if (!nowPlayingMovies?.length) return { randomIdx: 0, movieId: null };
+    const randomIdx = Math.floor(Math.random() * nowPlayingMovies.length);
+    const movieId = nowPlayingMovies[randomIdx]?.id;
+    return { randomIdx, movieId };
+  }, [nowPlayingMovies]);
+
+  const { randomIdx, movieId: mainMovieId } = getRandomMovie();
+
   useEffect(() => {
-    if (nowPlayingMovies) {
-      dispatch(fetchMovieTrailer(nowPlayingMovies[0]?.id));
+    if (mainMovieId) {
+      dispatch(fetchMovieTrailer(mainMovieId));
     }
-  }, [dispatch, nowPlayingMovies]);
+  }, [dispatch, mainMovieId]);
 
   return (
     <>
       <Header />
       <div className="flex flex-col items-center w-full bg-black min-h-screen">
-        <PrimaryMovieContainer />
+        <PrimaryMovieContainer mainMovieIdx={randomIdx} />
         <div className="w-full">
           <SecondaryMovieContainer />
         </div>

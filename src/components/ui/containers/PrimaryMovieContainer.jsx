@@ -1,22 +1,23 @@
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Spinner from "../spinner/Spinner";
 import YouTubePlayer from "@ui/cards/YouTubePlayer";
 import MovieDescriptionCard from "@ui/cards/MovieDescriptionCard";
 
-const PrimaryMovieContainer = () => {
+const PrimaryMovieContainer = ({ mainMovieIdx }) => {
   const trailerKey = useSelector((store) => store.movies.mainMovieTrailer);
-
   const nowPlayingMovies = useSelector(
     (store) => store.movies.nowPlayingMovies
   );
+  const isLoading = useSelector((store) => store.movies.loading.trailer);
 
-  if (!trailerKey) {
+  if (isLoading || !nowPlayingMovies) {
     return <Spinner />;
   }
 
-  if (!nowPlayingMovies || !trailerKey) return null;
-  const { title, overview, id } = nowPlayingMovies[0];
+  const mainMovie = nowPlayingMovies[mainMovieIdx];
+  if (!mainMovie || !trailerKey) return null;
+
+  const { title, overview, id } = mainMovie;
 
   return (
     <>
