@@ -5,6 +5,7 @@ import MovieDetails from "@pages/MovieDetails";
 import NotFound from "@pages/NotFound";
 import ProtectedRoute from "@common/ProtectedRoute";
 import PublicRoute from "./common/PublicRoute";
+import ScrollToTopLayout from "./common/ScrollToTop";
 
 const Body = () => {
   const appRouter = createBrowserRouter([
@@ -21,16 +22,21 @@ const Body = () => {
       element: <ProtectedRoute />,
       children: [
         {
-          path: "/",
-          element: <Browse />,
-        },
-        {
-          path: "browse",
-          element: <Browse />,
-        },
-        {
-          path: "browse/:movieId",
-          element: <MovieDetails />,
+          element: <ScrollToTopLayout />,
+          children: [
+            {
+              path: "/",
+              element: <Browse />,
+            },
+            {
+              path: "browse",
+              element: <Browse />,
+            },
+            {
+              path: "browse/:movieId",
+              element: <MovieDetails />,
+            },
+          ],
         },
       ],
     },
