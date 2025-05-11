@@ -1,4 +1,9 @@
-const MovieDetailsCard = ({ movie }) => {
+import Button from "@ui/common/Button";
+import React from "react";
+import { Play } from "lucide-react";
+import { Pause } from "lucide-react";
+
+const MovieDetailsCard = ({ movie, onPlayTrailer, isPlaying }) => {
   const { title, status, runtimeString, genresArray, topCasts, overview } =
     movie;
   return (
@@ -15,16 +20,19 @@ const MovieDetailsCard = ({ movie }) => {
           <span className="text-gray-300">Starring:</span>{" "}
           {topCasts?.slice(0, 3).join(", ")}
         </p>
-        <button className="text-gray-300 lg:text-lg text-md font-medium lg:mt-4 mt-4 cursor-pointer">
-          <span>
-            <img
-              className="w-4 inline-block mr-1"
-              alt="play"
-              src="https://i.postimg.cc/m2w9qgj4/icons8-play-50.png"
-            />
-          </span>
-          Play Trailer
-        </button>
+        <Button onClick={onPlayTrailer} className="mt-4 lg:inline-block">
+          {isPlaying ? (
+            <>
+              <Pause className="w-5 h-5 mr-2 inline fill-current" />
+              Pause Trailer
+            </>
+          ) : (
+            <>
+              <Play className="w-5 h-5 mr-2 inline fill-current" />
+              Play Trailer
+            </>
+          )}
+        </Button>
       </div>
     </>
   );
