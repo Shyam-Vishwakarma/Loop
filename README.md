@@ -6,4 +6,4 @@
 - User authentication and authorization were added for security. Firebase was used for both authentication and deploying the platform.
 - TMDB APIs are used to fetch details of the movies.
 
-Link: <a href="https://loop-tv4.web.app">loop-tv4.web.app</a>
+Link: <a href="https://loop-movies.onrender.com/">loop-movies</a>
